@@ -296,3 +296,49 @@ bool ChatHandler::HandleServerMotdCommand(char* /*args*/)
     PSendSysMessage(LANG_MOTD_CURRENT, sWorld.GetMotd());
     return true;
 }
+
+
+// Set the individual player's experience rate
+bool ChatHandler::HandleXPRateCommand(char* args)
+{
+    uint32 xpRate;
+    if(!ExtractUInt32(&args, xpRate)) // In case the user forgot to specify an exp rate.
+    {
+        SendSysMessage(LANG_SET_XP_RATE);
+        SetSentErrorMessage(true);
+        return false;
+    }
+    
+    // Check if the xp rate is 0...
+    if(xpRate == 0)
+    {
+        SendSysMessage(LANG_XP_RATE_INVALID);
+        SetSentErrorMessage(true);
+        return false;
+    }
+    
+//  //  ...or if it goes above max rate set in config
+//  if(xpRate > (CONFIG_INT32_PLAYER_MAX_XP_RATE))
+//  {
+//      SendSysMessage(LANG_XP_RATE_TOO_HIGH);
+//      SetSentErrorMessage(true);
+//      return false;
+//  }
+    
+    // Here's where the magic happens!
+    m_session->GetPlayer()->SetPersonalXPRate(xpRate);
+    PSendSysMessage(LANG_NEW_XP_RATE, xpRate);
+	return true;
+}
+
+bool ChatHandler::HandleGetXPRateCommand(char* /*args*/)
+{
+    PSendSysMessage(LANG_CURRENT_XP_RATE, m_session->GetPlayer()->GetPersonalXPRate());
+    return true;
+}
+
+bool ChatHandler::HandleGetMaxXPRateCommand(char* /*args*/)
+{
+    PSendSysMessage(LANG_MAXIMUM_XP_RATE, (CONFIG_INT32_PLAYER_MAX_XP_RATE-1));
+    return true;
+}

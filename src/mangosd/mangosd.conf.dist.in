@@ -1645,6 +1645,16 @@ CharDelete.Method   = 0
 CharDelete.MinLevel = 0
 CharDelete.KeepDays = 30
 
+
+###################################################################################################################
+#    PlayerXP.MaxRate
+#        The maximum rate a player can set their experience to
+#        Default: 1 - They cannot go above the server's rates
+#
+###################################################################################################################
+
+PlayerXP.MaxRate = 4
+
 ###################################################################################################
 # WARDEN SETTINGS
 #

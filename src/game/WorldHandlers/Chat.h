@@ -603,6 +603,12 @@ class ChatHandler
         bool HandleMmapTestArea(char* args);
         bool HandleMmapTestHeight(char* args);
 
+        // Personal XP rate settings
+        bool HandleXPRateCommand(char* args);
+        bool HandleGetXPRateCommand(char* args);
+        bool HandleGetMaxXPRateCommand(char* args);
+		//
+		
 #ifdef ENABLE_PLAYERBOTS
         bool HandlePlayerbotCommand(char* args);
         bool HandlePlayerbotConsoleCommand(char* args);

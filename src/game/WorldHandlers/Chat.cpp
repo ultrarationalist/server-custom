@@ -245,6 +245,15 @@ ChatCommand* ChatHandler::getCommandTable()
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
+    static ChatCommand expRateCommandTable[] =
+    {
+        { "set",            SEC_PLAYER,     true,  &ChatHandler::HandleXPRateCommand,              "", NULL },
+        { "get",            SEC_PLAYER,     true,  &ChatHandler::HandleGetXPRateCommand,           "", NULL },
+        { "max",            SEC_PLAYER,     true,  &ChatHandler::HandleGetMaxXPRateCommand,        "", NULL },
+		{ NULL,             0,                  false, NULL,                                           "", NULL }
+    };
+	
+	
     static ChatCommand gmCommandTable[] =
     {
         { "chat",           SEC_MODERATOR,      false, &ChatHandler::HandleGMChatCommand,              "", NULL },
@@ -710,6 +719,7 @@ ChatCommand* ChatHandler::getCommandTable()
         { "character",      SEC_GAMEMASTER,     true,  NULL,                                           "", characterCommandTable},
         { "debug",          SEC_MODERATOR,      true,  NULL,                                           "", debugCommandTable    },
         { "event",          SEC_GAMEMASTER,     false, NULL,                                           "", eventCommandTable    },
+        { "exprate",        SEC_PLAYER,         false, NULL,                                           "", expRateCommandTable  },
         { "gm",             SEC_PLAYER,         true,  NULL,                                           "", gmCommandTable       },
         { "honor",          SEC_GAMEMASTER,     false, NULL,                                           "", honorCommandTable    },
         { "go",             SEC_MODERATOR,      false, NULL,                                           "", goCommandTable       },

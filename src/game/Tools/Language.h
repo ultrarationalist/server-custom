@@ -1057,7 +1057,13 @@ enum MangosStrings
     //                                    10000-10999
 
     // Use for custom patches             11000-11999
-
+    LANG_SET_XP_RATE                     = 12000,
+    LANG_XP_RATE_TOO_HIGH                = 12001,
+    LANG_NEW_XP_RATE                     = 12002,
+    LANG_XP_RATE_INVALID                 = 12003,
+    LANG_CURRENT_XP_RATE                 = 12004,
+    LANG_MAXIMUM_XP_RATE                 = 12005,
+ 
     // NOT RESERVED IDS                   12000-1999999999
     // `db_script_string` table index     2000000000-2000999999 (MIN_DB_SCRIPT_STRING_ID-MAX_DB_SCRIPT_STRING_ID)
     // For other tables maybe             2001000000-2147483647 (max index)

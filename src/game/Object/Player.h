@@ -2336,6 +2336,10 @@ class Player : public Unit
         //PlayerTalentMap& GetTalentMap(uint8 spec) { return m_talents[spec]; }
 #endif
 
+       // Personal xp rate
+        void SetPersonalXPRate(uint32 rate) {  m_personalXPGain = rate; }
+        uint32 GetPersonalXPRate() { return m_personalXPGain; }
+
     protected:
 
         uint32 m_contestedPvPTimer;
@@ -2613,6 +2617,9 @@ class Player : public Unit
         uint32 m_temporaryUnsummonedPetNumber;
 
         ReputationMgr  m_reputationMgr;
+		       
+        // Personal xp gain
+        uint32 m_personalXPGain;
 };
 
 void AddItemsSetItem(Player* player, Item* item);
