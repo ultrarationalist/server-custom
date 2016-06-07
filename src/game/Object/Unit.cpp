@@ -3852,6 +3852,21 @@ void Unit::RemoveAura(uint32 spellId, SpellEffectIndex effindex, Aura* except)
             { ++iter; }
     }
 }
+
+void Unit::RemoveAurasByCaster(ObjectGuid casterGuid)
+{
+    for (SpellAuraHolderMap::iterator iter = m_spellAuraHolders.begin(); iter != m_spellAuraHolders.end();)
+    {
+        if (iter->second->GetCasterGuid() == casterGuid)
+        {
+            RemoveSpellAuraHolder(iter->second);
+            iter = m_spellAuraHolders.begin();
+        }
+        else
+            { ++iter; }
+    }
+}
+
 void Unit::RemoveAurasByCasterSpell(uint32 spellId, ObjectGuid casterGuid)
 {
     SpellAuraHolderBounds spair = GetSpellAuraHolderBounds(spellId);
@@ -4204,6 +4219,9 @@ void Unit::RemoveAllAurasOnEvade()
         RemoveSpellAuraHolder(iter->second, AURA_REMOVE_BY_DEFAULT);
         iter = m_spellAuraHolders.begin();
     }
+
+    if ((GetTypeId() == TYPEID_UNIT) && HasFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_TAPPED))
+        { RemoveFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_TAPPED); }
 }
 
 void Unit::DelaySpellAuraHolder(uint32 spellId, int32 delaytime, ObjectGuid casterGuid)
@@ -9151,7 +9169,7 @@ void Unit::NearTeleportTo(float x, float y, float z, float orientation, bool cas
 void Unit::MonsterMoveWithSpeed(float x, float y, float z, float speed, bool generatePath, bool forceDestination)
 {
     Movement::MoveSplineInit init(*this);
-    init.MoveTo(x, y, z, generatePath, forceDestination);
+    init.MoveTo(x, y, z, generatePath, forceDestination, 30.f);
     init.SetVelocity(speed);
     init.Launch();
 }
